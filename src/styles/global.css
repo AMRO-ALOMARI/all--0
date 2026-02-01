@@ -519,7 +519,7 @@ h6 {
     font-size: 0.85rem !important;
   }
 
-  /* Modal Mobile */
+  /* Modal Mobile Default */
   .modal {
     width: 90vw;
     max-width: 90vw;
@@ -560,6 +560,127 @@ h6 {
 
   .modal-footer button {
     width: 100%;
+  }
+}
+
+/* ===== ORIENTATION SPECIFIC ===== */
+
+/* Mobile Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
+  body {
+    overflow-y: auto;
+  }
+
+  .modal {
+    width: 95vw;
+    max-width: 95vw;
+    padding: 0.75rem;
+    max-height: 70vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+  }
+
+  .modal-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1rem;
+    width: 24px;
+    height: 24px;
+  }
+
+  .modal-header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal-header h2 {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  .modal-content {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .modal-footer button {
+    width: 100%;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.6rem !important;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 480px) and (orientation: landscape) {
+  html,
+  body {
+    height: 100vh;
+  }
+
+  .fullscreen-center {
+    padding: 0.5rem;
+    min-height: auto;
+    max-height: 100vh;
+  }
+
+  .modal {
+    width: 88vw;
+    max-width: 88vw;
+    padding: 0.75rem;
+    max-height: 85vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal-header h2 {
+    font-size: 0.95rem;
+  }
+
+  .modal-content {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .modal-footer {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .modal-footer button {
+    flex: 1;
+    padding: 0.5rem 0.5rem !important;
+    font-size: 0.6rem !important;
+  }
+
+  .modal-close {
+    font-size: 1rem;
+    width: 24px;
+    height: 24px;
+  }
+
+  nav {
+    display: none !important;
+  }
+
+  footer {
+    font-size: 0.45rem !important;
   }
 }
 
@@ -604,5 +725,28 @@ h6 {
     width: 24px;
     height: 24px;
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) and (orientation: portrait) {
+  .modal {
+    width: 95vw;
+    max-height: 65vh;
+    padding: 0.5rem;
+  }
+
+  .modal-header {
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .modal-content {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-footer {
+    gap: 0.3rem;
+    padding-top: 0.4rem;
   }
 }
