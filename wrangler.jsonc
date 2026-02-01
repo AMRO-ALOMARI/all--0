@@ -1,7 +1,29 @@
 {
+  "$schema": "https://json.schemastore.org/wrangler.json",
   "name": "allsitey",
+  "type": "javascript",
+  "main": "worker.js",
   "compatibility_date": "2026-02-01",
+  
   "assets": {
     "directory": "./dist"
+  },
+  
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "b2b224d4f4654055979b0c4a8a017ea6"
+    }
+  ],
+  
+  "env": {
+    "production": {
+      "routes": [
+        {
+          "pattern": "allsitey.com/*",
+          "zone_name": "allsitey.com"
+        }
+      ]
+    }
   }
 }
