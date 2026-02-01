@@ -7,8 +7,16 @@ import { Members } from "./sections/Members";
 import { Leader } from "./sections/Leader";
 import { Access } from "./sections/Access";
 import { MemberDetail } from "./components/MemberDetail";
+import { TheManifesto } from "./sections/TheManifesto";
 
-export type SectionId = "landing" | "eye" | "collective" | "members" | "leader" | "access";
+export type SectionId =
+  | "landing"
+  | "eye"
+  | "collective"
+  | "members"
+  | "leader"
+  | "access"
+  | "manifesto";
 
 export const App: React.FC = () => {
   const [section, setSection] = useState<SectionId>("landing");
@@ -75,6 +83,7 @@ export const App: React.FC = () => {
         <Leader onNavigate={navigate} activeMember={activeMember} />
       )}
       {section === "access" && <Access onNavigate={navigate} />}
+      {section === "manifesto" && <TheManifesto onNavigate={navigate} />}
 
       {selectedMemberId && (
         <MemberDetail

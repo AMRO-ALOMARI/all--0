@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { EyeLogo } from "../components/EyeLogo";
 
 type Props = {
@@ -6,13 +7,22 @@ type Props = {
 };
 
 export const LandingRitual: React.FC<Props> = ({ onEnter }) => {
+  const { t, i18n } = useTranslation();
   const textRef = useRef<HTMLDivElement | null>(null);
+
+  const text = [
+    t("not_by_accident"),
+    "",
+    t("we_do_not_recruit"),
+    t("we_observe"),
+    "",
+    t("eye_knows_you"),
+  ].join("\n");
 
   useEffect(() => {
     const el = textRef.current;
     if (!el) return;
-    const text =
-      "You are not here by accident.\n\nWe do not recruit.\nWe observe.\n\nIf you are seeing this,\nthe Eye already knows you.";
+
     let i = 0;
     el.innerHTML = "";
 
@@ -31,7 +41,9 @@ export const LandingRitual: React.FC<Props> = ({ onEnter }) => {
 
     const id = setTimeout(type, 800);
     return () => clearTimeout(id);
-  }, []);
+  }, [text]);
+
+  const dir = i18n.language === "ar" ? "rtl" : "ltr";
 
   return (
     <section className="fullscreen-center">
@@ -54,11 +66,13 @@ export const LandingRitual: React.FC<Props> = ({ onEnter }) => {
       >
         <div
           ref={textRef}
+          dir={dir}
           style={{
             fontSize: "0.85rem",
             letterSpacing: "0.18em",
             lineHeight: 2,
             minHeight: "5rem",
+            fontFamily: i18n.language === 'ar' ? 'monospace' : 'inherit',
           }}
         />
       </div>
@@ -68,7 +82,7 @@ export const LandingRitual: React.FC<Props> = ({ onEnter }) => {
         style={{ marginTop: "4rem", animationDelay: "4.5s", opacity: 0 }}
       >
         <button className="btn-primary" onClick={onEnter}>
-          ENTER UNDER OBSERVATION
+          {t("enter_under_observation")}
         </button>
       </div>
     </section>

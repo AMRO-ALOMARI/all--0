@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { SectionId } from "../App";
 import { EyeLogo } from "../components/EyeLogo";
 import { OrbitGraph } from "../components/OrbitGraph";
@@ -9,12 +10,15 @@ type Props = {
 };
 
 export const Leader: React.FC<Props> = ({ onNavigate, activeMember }) => {
+  const { t, i18n } = useTranslation();
+  const dir = i18n.language === "ar" ? "rtl" : "ltr";
+
   return (
     <section className="fullscreen-center">
       <div style={{ marginBottom: "3rem" }}>
         <EyeLogo size={220} />
       </div>
-      <div style={{ textAlign: "center", maxWidth: 500 }}>
+      <div dir={dir} style={{ textAlign: "center", maxWidth: 500, fontFamily: i18n.language === 'ar' ? 'monospace' : 'inherit' }}>
         <p
           style={{
             fontSize: "0.95rem",
@@ -23,7 +27,7 @@ export const Leader: React.FC<Props> = ({ onNavigate, activeMember }) => {
             marginBottom: "2rem",
           }}
         >
-          There is no eleventh member.
+          {t("no_eleventh_member")}
         </p>
         <p
           style={{
@@ -32,7 +36,7 @@ export const Leader: React.FC<Props> = ({ onNavigate, activeMember }) => {
             opacity: 0.9,
           }}
         >
-          There is only the Eye.
+          {t("only_the_eye")}
         </p>
       </div>
 

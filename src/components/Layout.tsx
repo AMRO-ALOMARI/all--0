@@ -1,5 +1,8 @@
 import React, { ReactNode, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { SectionId } from "../App";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Navigation } from "./Navigation"; // Import Navigation
 
 type LayoutProps = {
   section: SectionId;
@@ -10,7 +13,10 @@ type LayoutProps = {
 
 export const Layout: React.FC<LayoutProps> = ({
   children,
+  section,
+  onNavigate,
 }) => {
+  const { t } = useTranslation();
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -51,6 +57,8 @@ export const Layout: React.FC<LayoutProps> = ({
         backgroundColor: "black",
       }}
     >
+      <LanguageSwitcher />
+      <Navigation onNavigate={onNavigate} currentSection={section} />
       {/* background glow */}
       <div
         style={{
@@ -134,9 +142,17 @@ export const Layout: React.FC<LayoutProps> = ({
           textTransform: "uppercase",
           color: "rgba(245,245,240,0.5)",
           zIndex: 5,
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
         }}
       >
-        ALLSITEY SEES.
+        <div>{t("footer_text")}</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
+          <a href="https://www.tiktok.com/@allsitey" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(245,245,240,0.5)", textDecoration: "none" }}>TIKTOK</a>
+          <a href="https://www.instagram.com/@allsitey" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(245,245,240,0.5)", textDecoration: "none" }}>INSTAGRAM</a>
+          <a href="https://twitter.com/@allsitey" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(245,245,240,0.5)", textDecoration: "none" }}>X</a>
+        </div>
       </footer>
     </div>
   );

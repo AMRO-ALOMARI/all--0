@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { members } from "../data/members";
 import { OrbitGraph } from "./OrbitGraph";
 import type { SectionId } from "../App";
@@ -16,12 +17,15 @@ export const MemberDetail: React.FC<Props> = ({
   onNavigate,
   onSetMember,
 }) => {
+  const { t, i18n } = useTranslation();
   const member = members.find((m) => m.id === memberId);
   if (!member) return null;
 
   const index = members.findIndex((m) => m.id === memberId);
   const prevId = members[(index + members.length - 1) % members.length].id;
   const nextId = members[(index + 1) % members.length].id;
+
+  const dir = i18n.language === "ar" ? "rtl" : "ltr";
 
   return (
     <div
@@ -35,10 +39,12 @@ export const MemberDetail: React.FC<Props> = ({
         alignItems: "center",
         justifyContent: "center",
         padding: "2rem",
+        fontFamily: i18n.language === 'ar' ? 'monospace' : 'inherit',
       }}
       onClick={onClose}
     >
       <div
+        dir={dir}
         style={{
           maxWidth: 700,
           width: "100%",
@@ -76,7 +82,7 @@ export const MemberDetail: React.FC<Props> = ({
                 color: member.color,
               }}
             >
-              {member.codeName}
+              {t(`member_${member.id}_codeName`)}
             </h2>
           </div>
           <button
@@ -89,9 +95,10 @@ export const MemberDetail: React.FC<Props> = ({
               fontSize: "0.65rem",
               textTransform: "uppercase",
               cursor: "pointer",
+              fontFamily: 'inherit',
             }}
           >
-            CLOSE
+            {t("close_button")}
           </button>
         </div>
 
@@ -112,7 +119,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "0.5rem",
               }}
             >
-              Function
+              {t("Function")}
             </p>
             <p
               style={{
@@ -121,7 +128,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "1.5rem",
               }}
             >
-              {member.functionLabel}
+              {t(`member_${member.id}_functionLabel`)}
             </p>
 
             <p
@@ -133,7 +140,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "0.5rem",
               }}
             >
-              Status
+              {t("Status")}
             </p>
             <p
               style={{
@@ -142,7 +149,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "1.5rem",
               }}
             >
-              {member.status} • Last Signal: {member.lastSignal}
+              {t(member.status === 'Active' ? 'status_active' : 'status_dormant')} • {t('Last Signal')}: {member.lastSignal}
             </p>
 
             <p
@@ -154,7 +161,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "0.5rem",
               }}
             >
-              Brief
+              {t("brief_label")}
             </p>
             <p
               style={{
@@ -164,7 +171,7 @@ export const MemberDetail: React.FC<Props> = ({
                 opacity: 0.9,
               }}
             >
-              {member.description}
+              {t(`member_${member.id}_description`)}
             </p>
           </div>
 
@@ -178,7 +185,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "0.6rem",
               }}
             >
-              Mantra
+              {t("mantra_label")}
             </p>
             <p
               style={{
@@ -188,7 +195,7 @@ export const MemberDetail: React.FC<Props> = ({
                 marginBottom: "1.8rem",
               }}
             >
-              “{member.mantra}”
+              “{t(`member_${member.id}_mantra`)}”
             </p>
 
             <OrbitGraph activeMember={memberId} />
@@ -214,6 +221,7 @@ export const MemberDetail: React.FC<Props> = ({
                 border: "none",
                 color: "rgba(245,245,240,0.6)",
                 cursor: "pointer",
+                fontFamily: 'inherit',
               }}
             >
               ◀ ENTITY_{prevId.toString().padStart(2, "0")}
@@ -225,6 +233,7 @@ export const MemberDetail: React.FC<Props> = ({
                 border: "none",
                 color: "rgba(245,245,240,0.6)",
                 cursor: "pointer",
+                fontFamily: 'inherit',
               }}
             >
               ENTITY_{nextId.toString().padStart(2, "0")} ▶
@@ -239,9 +248,10 @@ export const MemberDetail: React.FC<Props> = ({
               color: "var(--ivory-silver)",
               cursor: "pointer",
               letterSpacing: "0.25em",
+              fontFamily: 'inherit',
             }}
           >
-            HAND OVER TO THE EYE
+            {t("hand_over_button")}
           </button>
         </div>
       </div>

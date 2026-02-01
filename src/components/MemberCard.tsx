@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { Member } from "../data/members";
 
 type Props = {
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className="member-card"
@@ -32,7 +35,7 @@ export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
           }}
         >
           <h3 style={{ fontSize: "1.2rem", letterSpacing: "0.2em" }}>
-            ENTITY_{member.id.toString().padStart(2, "0")}
+            {t(`member_${member.id}_codeName`)}
           </h3>
           <span
             style={{
@@ -56,7 +59,7 @@ export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
             opacity: 0.7,
           }}
         >
-          Function: {member.function}
+          {t('Function')}: {t(`member_${member.id}_functionLabel`)}
         </p>
         <p
           style={{
@@ -65,7 +68,7 @@ export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
             marginBottom: "1rem",
           }}
         >
-          Status: {member.status}
+          {t('Status')}: {t(member.status === 'Active' ? 'status_active' : 'status_dormant')}
         </p>
         <p
           style={{
@@ -75,7 +78,7 @@ export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
             fontFamily: "monospace",
           }}
         >
-          Last Signal: {member.lastSignal}
+          {t('Last Signal')}: {member.lastSignal}
         </p>
       </div>
       <p
@@ -90,9 +93,11 @@ export const MemberCard: React.FC<Props> = ({ member, onHover, onOpen }) => {
           letterSpacing: "0.3em",
           opacity: 0,
           pointerEvents: "none",
+          textAlign: 'center',
+          width: '80%'
         }}
       >
-        Data obeys silence.
+        "{t(`member_${member.id}_mantra`)}"
       </p>
     </div>
   );

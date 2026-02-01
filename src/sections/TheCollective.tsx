@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { SectionId } from "../App";
 
 type Props = {
@@ -6,6 +7,8 @@ type Props = {
 };
 
 export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
+  const { t } = useTranslation();
+
   return (
     <section className="fullscreen-center">
       <div style={{ maxWidth: 800, textAlign: "center" }}>
@@ -18,8 +21,7 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
           }}
         >
           <p style={{ marginBottom: "3rem" }}>
-            <span style={{ fontWeight: 500 }}>ALLSITEY</span> is a closed
-            intelligence structure.
+            <span style={{ fontWeight: 500 }}>ALLSITEY</span> {t("allsitey_is_closed")}
           </p>
 
           <div
@@ -52,7 +54,7 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
                   opacity: 0.7,
                 }}
               >
-                Entities Execute
+                {t("entities_execute")}
               </div>
             </div>
             <div
@@ -80,7 +82,7 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
                   opacity: 0.7,
                 }}
               >
-                Entity Decides
+                {t("entity_decides")}
               </div>
             </div>
           </div>
@@ -94,7 +96,7 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
                 opacity: 0.8,
               }}
             >
-              No democracy.
+              {t("no_democracy")}
             </p>
             <p
               style={{
@@ -104,7 +106,7 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
                 opacity: 0.8,
               }}
             >
-              No consensus.
+              {t("no_consensus")}
             </p>
             <p
               style={{
@@ -115,9 +117,30 @@ export const TheCollective: React.FC<Props> = ({ onNavigate }) => {
                 fontWeight: 400,
               }}
             >
-              Only alignment.
+              {t("only_alignment")}
             </p>
           </div>
+
+          <button
+            onClick={() => onNavigate("manifesto")}
+            style={{
+                background: "transparent",
+                border: "none",
+                color: "rgba(245,245,240,0.7)",
+                padding: "10px 40px",
+                fontFamily: "inherit",
+                letterSpacing: "0.3em",
+                cursor: "pointer",
+                transition: "all 0.3s",
+                marginTop: '4rem',
+                fontSize: '0.7rem'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.color = 'var(--dark-blood)'}
+            onMouseOut={(e) => e.currentTarget.style.color = 'rgba(245,245,240,0.7)'}
+            >
+            {t("read_the_doctrine")}
+          </button>
+
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import type { SectionId } from "../App";
 import { MemberCard } from "../components/MemberCard";
 import { OrbitGraph } from "../components/OrbitGraph";
@@ -19,6 +20,7 @@ export const Members: React.FC<Props> = ({
   onActiveMemberChange,
   onOpenMember,
 }) => {
+  const { t } = useTranslation();
   return (
     <section
       style={{
@@ -37,7 +39,7 @@ export const Members: React.FC<Props> = ({
           fontWeight: 200,
         }}
       >
-        MEMBERS
+        {t("members_title")}
       </h1>
 
       <div
